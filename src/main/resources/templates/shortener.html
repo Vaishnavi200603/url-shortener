@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="url"] {
+            width: 90%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            word-break: break-all;
+        }
+
+        .result a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>URL Shortener</h2>
+
+    <form th:action="@{/api/shorten}" method="post">
+        <input type="url" name="longUrl" placeholder="Enter your long URL" required>
+        <button type="submit">Generate Short URL</button>
+    </form>
+
+    <!-- Show result if present -->
+    <div class="result" th:if="${shortUrl}">
+        Short URL:<br>
+        <a th:href="${shortUrl}" th:text="${shortUrl}" target="_blank"></a>
+    </div>
+
+</div>
+
+</body>
+</html>
